@@ -1,1 +1,22 @@
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('input[name="start"],input[name="end"]').forEach(i=>i.setAttribute('dir','ltr'));});
+$(function () {
+    $('.jalali-date').persianDatepicker({
+        format: 'YYYY/MM/DD',
+        autoClose: true,
+        initialValue: false,
+        observer: true,
+        calendar: {
+            persian: {
+                locale: 'fa'
+            }
+        },
+        navigator: {
+            enabled: true
+        },
+        toolbox: {
+            enabled: true,
+            calendarSwitch: {
+                enabled: false
+            }
+        }
+    });
+});
