@@ -1,1 +1,12 @@
-<form method="get" class="filter-box"><div><label>از تاریخ</label><input name="start" value="{{ start }}" placeholder="1405-04-01" dir="ltr"></div><div><label>تا تاریخ</label><input name="end" value="{{ end }}" placeholder="1405-04-31" dir="ltr"></div><button type="submit">جستجو</button></form>
+<form method="get" class="filter-box jalali-filter">
+    <div>
+        <label for="start-date">از تاریخ</label>
+        <input id="start-date" class="jalali-date" name="start" value="{{ start }}" placeholder="۱۴۰۵/۰۱/۰۱" autocomplete="off" readonly>
+    </div>
+    <div>
+        <label for="end-date">تا تاریخ</label>
+        <input id="end-date" class="jalali-date" name="end" value="{{ end }}" placeholder="۱۴۰۵/۰۱/۳۱" autocomplete="off" readonly>
+    </div>
+    <button type="submit">جستجو</button>
+    <a class="clear-filter" href="{{ request.path }}">پاک کردن</a>
+</form>
