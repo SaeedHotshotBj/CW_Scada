@@ -1,0 +1,35 @@
+from database.connection import get_connection
+
+
+def initialize():
+    conn=get_connection();c=conn.cursor()
+    statements=[
+    """IF OBJECT_ID('AccountantDaily','U') IS NULL CREATE TABLE AccountantDaily(ID INT IDENTITY PRIMARY KEY,RecordDate DATE NOT NULL,SalesAmount DECIMAL(18,2),PurchaseAmount DECIMAL(18,2),ProductionCost DECIMAL(18,2),Profit DECIMAL(18,2),MeterProduced DECIMAL(18,2))""",
+    """IF OBJECT_ID('AccountantSales','U') IS NULL CREATE TABLE AccountantSales(ID INT IDENTITY PRIMARY KEY,SaleDate DATETIME NOT NULL,CustomerName NVARCHAR(200),ProductName NVARCHAR(200),Quantity DECIMAL(18,2),UnitPrice DECIMAL(18,2),TotalAmount DECIMAL(18,2),PaymentStatus NVARCHAR(50))""",
+    """IF OBJECT_ID('AccountantPurchases','U') IS NULL CREATE TABLE AccountantPurchases(ID INT IDENTITY PRIMARY KEY,PurchaseDate DATETIME NOT NULL,SupplierName NVARCHAR(200),MaterialName NVARCHAR(200),Quantity DECIMAL(18,2),UnitPrice DECIMAL(18,2),TotalAmount DECIMAL(18,2),PaymentStatus NVARCHAR(50))""",
+    """IF OBJECT_ID('AccountantProductionCost','U') IS NULL CREATE TABLE AccountantProductionCost(ID INT IDENTITY PRIMARY KEY,CostDate DATETIME NOT NULL,MachineName NVARCHAR(200),ProductName NVARCHAR(200),MaterialCost DECIMAL(18,2),ElectricityCost DECIMAL(18,2),LaborCost DECIMAL(18,2),MaintenanceCost DECIMAL(18,2),TotalCost DECIMAL(18,2))""",
+    """IF OBJECT_ID('AccountantInventory','U') IS NULL CREATE TABLE AccountantInventory(ID INT IDENTITY PRIMARY KEY,ItemName NVARCHAR(200),Category NVARCHAR(100),Quantity DECIMAL(18,2),Unit NVARCHAR(50),UnitPrice DECIMAL(18,2),TotalValue DECIMAL(18,2),MinimumStock DECIMAL(18,2))""",
+    """IF OBJECT_ID('AccountantReceivables','U') IS NULL CREATE TABLE AccountantReceivables(ID INT IDENTITY PRIMARY KEY,CustomerName NVARCHAR(200),InvoiceNumber NVARCHAR(100),InvoiceDate DATE,DueDate DATE,Amount DECIMAL(18,2),PaidAmount DECIMAL(18,2),RemainingAmount DECIMAL(18,2),Status NVARCHAR(50))""",
+    """IF OBJECT_ID('AccountantPayables','U') IS NULL CREATE TABLE AccountantPayables(ID INT IDENTITY PRIMARY KEY,SupplierName NVARCHAR(200),InvoiceNumber NVARCHAR(100),InvoiceDate DATE,DueDate DATE,Amount DECIMAL(18,2),PaidAmount DECIMAL(18,2),RemainingAmount DECIMAL(18,2),Status NVARCHAR(50))""",
+    """IF OBJECT_ID('AccountantCashFlow','U') IS NULL CREATE TABLE AccountantCashFlow(ID INT IDENTITY PRIMARY KEY,TransactionDate DATETIME,TransactionType NVARCHAR(50),Description NVARCHAR(300),Amount DECIMAL(18,2))"""
+    ]
+    for s in statements:c.execute(s)
+    c.execute("SELECT COUNT(*) FROM AccountantDaily")
+    if c.fetchone()[0]==0:
+        daily=[('2026-07-01',1850000000,920000000,610000000,320000000,14500),('2026-07-02',2100000000,970000000,690000000,440000000,16200),('2026-07-03',1980000000,910000000,640000000,430000000,15100),('2026-07-04',2250000000,1050000000,710000000,490000000,17100),('2026-07-05',2350000000,1100000000,760000000,490000000,18100),('2026-07-06',2450000000,1150000000,790000000,510000000,19000),('2026-07-07',2200000000,1010000000,720000000,470000000,17400),('2026-07-08',2580000000,1200000000,830000000,550000000,19800),('2026-07-09',2710000000,1260000000,870000000,580000000,20500),('2026-07-10',2490000000,1170000000,810000000,510000000,19100)]
+        for r in daily:c.execute("INSERT INTO AccountantDaily(RecordDate,SalesAmount,PurchaseAmount,ProductionCost,Profit,MeterProduced) VALUES(?,?,?,?,?,?)",r)
+        sales=[('2026-07-01 08:30','شرکت کابل پارس','کابل قدرت 4x16',1200,850000,1020000000,'پرداخت شده'),('2026-07-02 10:15','صنایع برق آریا','سیم افشان 2.5',2500,310000,775000000,'بخشی پرداخت شده'),('2026-07-03 11:20','پروژه نیرو گستر','کابل قدرت 3x35',900,1250000,1125000000,'پرداخت شده'),('2026-07-04 09:40','شرکت ساختمان شرق','کابل افشان 4x6',1800,490000,882000000,'در انتظار پرداخت'),('2026-07-05 14:10','تأسیسات نوین','سیم ارت 16',3000,190000,570000000,'پرداخت شده')]
+        for r in sales:c.execute("INSERT INTO AccountantSales(SaleDate,CustomerName,ProductName,Quantity,UnitPrice,TotalAmount,PaymentStatus) VALUES(?,?,?,?,?,?,?)",r)
+        purchases=[('2026-07-01 09:00','مس ایران','مفتول مسی',5000,185000,925000000,'بخشی پرداخت شده'),('2026-07-02 08:20','پتروشیمی پارس','گرانول PVC',2800,145000,406000000,'پرداخت شده'),('2026-07-03 12:00','فولاد مرکزی','قرقره فلزی',300,850000,255000000,'در انتظار پرداخت'),('2026-07-04 10:30','مواد عایق شرق','مواد عایق',1500,210000,315000000,'پرداخت شده')]
+        for r in purchases:c.execute("INSERT INTO AccountantPurchases(PurchaseDate,SupplierName,MaterialName,Quantity,UnitPrice,TotalAmount,PaymentStatus) VALUES(?,?,?,?,?,?,?)",r)
+        costs=[('2026-07-01','خط تولید شماره 1','کابل قدرت 4x16',310000000,45000000,85000000,25000000,465000000),('2026-07-02','خط تولید شماره 2','سیم افشان 2.5',280000000,39000000,79000000,18000000,416000000),('2026-07-03','خط تولید شماره 1','کابل قدرت 3x35',360000000,51000000,92000000,30000000,533000000),('2026-07-04','خط تولید شماره 3','کابل افشان 4x6',295000000,47000000,81000000,21000000,444000000)]
+        for r in costs:c.execute("INSERT INTO AccountantProductionCost(CostDate,MachineName,ProductName,MaterialCost,ElectricityCost,LaborCost,MaintenanceCost,TotalCost) VALUES(?,?,?,?,?,?,?,?)",r)
+        inv=[('مفتول مسی','مواد اولیه',8200,'کیلوگرم',192000,1574400000,3000),('گرانول PVC','مواد اولیه',4600,'کیلوگرم',148000,680800000,1500),('مواد عایق','مواد اولیه',2300,'کیلوگرم',215000,494500000,800),('قرقره فلزی','بسته بندی',180,'عدد',880000,158400000,50),('کابل قدرت 4x16','محصول نهایی',3400,'متر',850000,2890000000,1000)]
+        for r in inv:c.execute("INSERT INTO AccountantInventory(ItemName,Category,Quantity,Unit,UnitPrice,TotalValue,MinimumStock) VALUES(?,?,?,?,?,?,?)",r)
+        rec=[('شرکت کابل پارس','INV-1001','2026-06-20','2026-07-20',1020000000,1020000000,0,'تسویه شده'),('صنایع برق آریا','INV-1002','2026-06-22','2026-07-22',775000000,400000000,375000000,'بخشی پرداخت شده'),('شرکت ساختمان شرق','INV-1003','2026-06-25','2026-07-25',882000000,0,882000000,'سررسید شده')]
+        for r in rec:c.execute("INSERT INTO AccountantReceivables(CustomerName,InvoiceNumber,InvoiceDate,DueDate,Amount,PaidAmount,RemainingAmount,Status) VALUES(?,?,?,?,?,?,?,?)",r)
+        pay=[('مس ایران','PUR-2001','2026-06-18','2026-07-18',925000000,500000000,425000000,'بخشی پرداخت شده'),('پتروشیمی پارس','PUR-2002','2026-06-21','2026-07-21',406000000,406000000,0,'تسویه شده'),('فولاد مرکزی','PUR-2003','2026-06-25','2026-07-25',255000000,0,255000000,'سررسید شده')]
+        for r in pay:c.execute("INSERT INTO AccountantPayables(SupplierName,InvoiceNumber,InvoiceDate,DueDate,Amount,PaidAmount,RemainingAmount,Status) VALUES(?,?,?,?,?,?,?,?)",r)
+        cf=[('2026-07-01 08:00','دریافت','دریافت از مشتری کابل پارس',1020000000),('2026-07-01 12:00','پرداخت','خرید مفتول مسی',-500000000),('2026-07-02 09:00','دریافت','دریافت از مشتریان',400000000),('2026-07-03 14:00','پرداخت','خرید مواد اولیه',-406000000),('2026-07-05 11:00','پرداخت','حقوق پرسنل تولید',-310000000)]
+        for r in cf:c.execute("INSERT INTO AccountantCashFlow(TransactionDate,TransactionType,Description,Amount) VALUES(?,?,?,?)",r)
+    conn.commit();conn.close()
