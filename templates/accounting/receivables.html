@@ -1,1 +1,6 @@
-{% extends 'base.html' %}{% block content %}<h1>حساب‌های دریافتنی</h1><div class="table-container"><table><thead><tr><th>مشتری</th><th>فاکتور</th><th>تاریخ</th><th>سررسید</th><th>مبلغ</th><th>پرداخت شده</th><th>مانده</th><th>وضعیت</th></tr></thead><tbody>{% for r in rows %}<tr><td>{{ r[0] }}</td><td>{{ r[1] }}</td><td>{{ r[2] }}</td><td>{{ r[3] }}</td><td>{{ r[4]|money }}</td><td>{{ r[5]|money }}</td><td>{{ r[6]|money }}</td><td>{{ r[7] }}</td></tr>{% endfor %}</tbody></table></div>{% endblock %}
+{% extends 'base.html' %}
+{% block content %}
+<h1>حساب‌های دریافتنی</h1>
+<div class="table-container"><table><thead><tr><th>مشتری</th><th>فاکتور</th><th>تاریخ</th><th>سررسید</th><th>مبلغ</th><th>پرداخت شده</th><th>مانده</th><th>وضعیت</th></tr></thead>
+<tbody>{% for r in rows %}<tr><td>{{ r[0] }}</td><td>{{ r[1] }}</td><td>{{ r[2]|jalali }}</td><td>{{ r[3]|jalali }}</td><td>{{ r[4]|money }}</td><td>{{ r[5]|money }}</td><td>{{ r[6]|money }}</td><td>{{ r[7] }}</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}
