@@ -1,0 +1,1 @@
+function createAccountingChart(canvasId,labels,values,title){const canvas=document.getElementById(canvasId);if(!canvas)return;new Chart(canvas,{type:'line',data:{labels:labels,datasets:[{label:title,data:values,tension:.3}]},options:{responsive:true}});}
