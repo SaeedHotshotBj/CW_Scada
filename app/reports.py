@@ -1,15 +1,17 @@
-from flask import Blueprint,render_template,request
+from flask import Blueprint, render_template, request
 from database.queries import get_summary
-import jdatetime
+from app.jalali import jalali_to_gregorian
 
-reports=Blueprint('reports',__name__,url_prefix='/reports')
+reports = Blueprint('reports', __name__, url_prefix='/reports')
 
-def convert_date(value):
-    if not value:return None
-    y,m,d=value.replace('/','-').split('-')
-    return jdatetime.date(int(y),int(m),int(d)).togregorian()
 
 @reports.route('/')
 def index():
-    start=request.args.get('start');end=request.args.get('end')
-    return render_template('accounting/report.html',summary=get_summary(convert_date(start),convert_date(end)),start=start or '',end=end or '')
+    start = request.args.get('start', '').strip()
+    end = request.args.get('end', '').strip()
+    return render_template(
+        'accounting/report.html',
+        summary=get_summary(jalali_to_gregorian(start), jalali_to_gregorian(end)),
+        start=start,
+        end=end,
+    )
