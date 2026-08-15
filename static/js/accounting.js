@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('input[name="start"],input[name="end"]').forEach(i=>i.setAttribute('dir','ltr'));});
