@@ -11,8 +11,8 @@
 <div class="container">
   <header><h1>گزارش مدیریتی تولید و ارزش تولید</h1><p>اطلاعات تولید Trend با اعمال قیمت بر اساس وزن و متراژ</p></header>
   <section class="filters">
-    <div><label>از تاریخ</label><input id="start" data-jdp placeholder="۱۴۰۵/۰۱/۰۱" autocomplete="off"></div>
-    <div><label>تا تاریخ</label><input id="end" data-jdp placeholder="۱۴۰۵/۰۱/۳۱" autocomplete="off"></div>
+    <div><label>از تاریخ</label><input id="start" type="text" data-jdp readonly placeholder="انتخاب تاریخ" autocomplete="off"></div>
+    <div><label>تا تاریخ</label><input id="end" type="text" data-jdp readonly placeholder="انتخاب تاریخ" autocomplete="off"></div>
     <div><label>محصول</label><select id="product"><option value="">همه محصولات</option></select></div>
     <button onclick="loadData()">نمایش گزارش</button>
   </section>
