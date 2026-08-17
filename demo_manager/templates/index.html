@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>گزارش مدیریتی تولید</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+  <header><h1>گزارش مدیریتی تولید و ارزش تولید</h1><p>اطلاعات تولید Trend با اعمال قیمت بر اساس وزن و متراژ</p></header>
+
+  <section class="filters">
+    <div><label>از تاریخ</label><input id="start" class="date" placeholder="۱۴۰۵/۰۱/۰۱"></div>
+    <div><label>تا تاریخ</label><input id="end" class="date" placeholder="۱۴۰۵/۰۱/۳۱"></div>
+    <div><label>محصول</label><select id="product"><option value="">همه محصولات</option></select></div>
+    <button onclick="loadData()">نمایش گزارش</button>
+  </section>
+
+  <div id="message" class="message"></div>
+
+  <section class="cards">
+    <div><span>مجموع وزن</span><b id="sumWeight">0</b><small>کیلوگرم</small></div>
+    <div><span>مجموع متراژ</span><b id="sumMeters">0</b><small>متر</small></div>
+    <div><span>ارزش بر اساس وزن</span><b id="sumWeightAmount">0</b><small>ریال</small></div>
+    <div><span>ارزش بر اساس متراژ</span><b id="sumMeterAmount">0</b><small>ریال</small></div>
+    <div class="total"><span>ارزش کل تولید</span><b id="sumTotal">0</b><small>ریال</small></div>
+  </section>
+
+  <section class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>تاریخ</th><th>محصول</th><th>وزن</th><th>قیمت هر کیلو</th><th>مبلغ وزن</th>
+        <th>متراژ</th><th>قیمت هر متر</th><th>مبلغ متراژ</th><th>مبلغ کل</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fa.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
