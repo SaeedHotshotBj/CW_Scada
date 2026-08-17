@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>گزارش مدیریتی تولید</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/majidh1/jalalidatepicker@0.9.6/dist/jalalidatepicker.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@majidh1/jalalidatepicker@1.0.0/dist/jalalidatepicker.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 <div class="container">
   <header><h1>گزارش مدیریتی تولید و ارزش تولید</h1><p>اطلاعات تولید Trend با اعمال قیمت بر اساس وزن و متراژ</p></header>
   <section class="filters">
-    <div><label>از تاریخ</label><input id="start" type="text" data-jdp readonly placeholder="انتخاب تاریخ" autocomplete="off"></div>
-    <div><label>تا تاریخ</label><input id="end" type="text" data-jdp readonly placeholder="انتخاب تاریخ" autocomplete="off"></div>
+    <div><label>از تاریخ</label><input id="start" type="text" data-jdp data-jdp-only-date readonly placeholder="انتخاب تاریخ" autocomplete="off"></div>
+    <div><label>تا تاریخ</label><input id="end" type="text" data-jdp data-jdp-only-date readonly placeholder="انتخاب تاریخ" autocomplete="off"></div>
     <div><label>محصول</label><select id="product"><option value="">همه محصولات</option></select></div>
     <button onclick="loadData()">نمایش گزارش</button>
   </section>
@@ -31,7 +31,7 @@
     </tr></thead><tbody id="rows"></tbody></table>
   </section>
 </div>
-<script src="https://cdn.jsdelivr.net/gh/majidh1/jalalidatepicker@0.9.6/dist/jalalidatepicker.min.js"></script>
+<script src="https://unpkg.com/@majidh1/jalalidatepicker@1.0.0/dist/jalalidatepicker.min.js"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
