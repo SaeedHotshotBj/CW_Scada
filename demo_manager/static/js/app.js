@@ -1,6 +1,17 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
   if (window.jalaliDatepicker) {
-    jalaliDatepicker.startWatch({ minDate: 'attr', maxDate: 'attr', time: false, separator: ' ' });
+    jalaliDatepicker.startWatch({
+      minDate: 'attr',
+      maxDate: 'attr',
+      time: false,
+      separator: ' ',
+      autoShow: true
+    });
+    document.querySelectorAll('[data-jdp]').forEach(function (input) {
+      input.addEventListener('click', function () {
+        jalaliDatepicker.show(this);
+      });
+    });
   }
   loadProducts();
   loadData();
