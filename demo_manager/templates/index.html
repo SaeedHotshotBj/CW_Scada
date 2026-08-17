@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-  <header><h1>گزارش مدیریتی تولید و ارزش تولید</h1><p>اطلاعات تولید Trend با اعمال قیمت بر اساس وزن و متراژ</p></header>
+  <header><h1>گزارش مدیریتی تولید</h1><p>اطلاعات تولید با اعمال قیمت بر اساس وزن و متراژ</p></header>
   <section class="filters">
     <div><label>از تاریخ</label><input id="start" type="text" data-jdp data-jdp-only-date readonly placeholder="انتخاب تاریخ" autocomplete="off"></div>
     <div><label>تا تاریخ</label><input id="end" type="text" data-jdp data-jdp-only-date readonly placeholder="انتخاب تاریخ" autocomplete="off"></div>
@@ -22,12 +22,11 @@
     <div><span>مجموع متراژ</span><b id="sumMeters">0</b><small>متر</small></div>
     <div><span>ارزش بر اساس وزن</span><b id="sumWeightAmount">0</b><small>ریال</small></div>
     <div><span>ارزش بر اساس متراژ</span><b id="sumMeterAmount">0</b><small>ریال</small></div>
-    <div class="total"><span>ارزش کل تولید</span><b id="sumTotal">0</b><small>ریال</small></div>
   </section>
   <section class="table-wrap">
     <table><thead><tr>
       <th>تاریخ</th><th>محصول</th><th>وزن</th><th>قیمت هر کیلو</th><th>مبلغ وزن</th>
-      <th>متراژ</th><th>قیمت هر متر</th><th>مبلغ متراژ</th><th>مبلغ کل</th>
+      <th>متراژ</th><th>قیمت هر متر</th><th>مبلغ متراژ</th>
     </tr></thead><tbody id="rows"></tbody></table>
   </section>
 </div>
